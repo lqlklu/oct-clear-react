@@ -1,0 +1,1 @@
+export { ResultPair } from "./component";
