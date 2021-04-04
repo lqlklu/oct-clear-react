@@ -7488,6 +7488,11 @@ mobx-react@^7.1.0:
   dependencies:
     mobx-react-lite "^3.2.0"
 
+mobx-state-tree@^5.0.1:
+  version "5.0.1"
+  resolved "https://registry.npm.taobao.org/mobx-state-tree/download/mobx-state-tree-5.0.1.tgz#d495725fe11075d8fde8f02ab65db6736b44e014"
+  integrity sha1-1JVyX+EQddj96PAqtl22c2tE4BQ=
+
 mobx@^6.1.8:
   version "6.1.8"
   resolved "https://registry.npm.taobao.org/mobx/download/mobx-6.1.8.tgz?cache=0&sync_timestamp=1614612975953&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fmobx%2Fdownload%2Fmobx-6.1.8.tgz#5d03cb76d8f7694dd82bfb2578d886945b66450d"
