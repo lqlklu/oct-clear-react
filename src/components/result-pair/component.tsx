@@ -2,10 +2,11 @@ import React, { FC } from "react";
 import { Button, Image } from "antd";
 import axios from "axios";
 
-import "./style.css";
 import { RootInstance } from "@src/store";
 import { LogItemInstance } from "@src/store/logs";
 import { observer } from "mobx-react";
+
+import "./style.css";
 
 export interface ResultPairProps {
   store: RootInstance;
@@ -25,12 +26,14 @@ export const ResultPair: FC<ResultPairProps> = observer(({ store, item }) => {
   };
   return (
     <div className="result-pair">
-      <span className="result-pair__image">
-        <Image src={url + "?type=upload"} alt="a" />
-      </span>
-      <span className="result-pair__image">
-        <Image src={url + "?type=result"} alt="b" />
-      </span>
+      <div className="result-pair__images">
+        <span className="result-pair__image">
+          <Image src={url + "?type=upload"} alt="a" />
+        </span>
+        <span className="result-pair__image">
+          <Image src={url + "?type=result"} alt="b" />
+        </span>
+      </div>
       <div>
         <p>{item.name}</p>
         <p>{new Date(item.time * 1000).toLocaleString()}</p>

@@ -3,12 +3,14 @@ import axios, { AxiosResponse } from "axios";
 import { Layout } from "antd";
 import { observer } from "mobx-react";
 
-import { LogsList } from "../logs-list/component";
-import { Footer } from "../footer";
-import "./style.css";
-import { Header } from "../header";
-import { RootInstance } from "@src/store";
 import { LogItemInstance } from "@store/logs";
+import { RootInstance } from "@src/store";
+import { Main } from "../main";
+import { Header } from "../header";
+import { History } from "../history/component";
+import { Footer } from "../footer";
+
+import "./style.css";
 
 export interface AppProps {
   store: RootInstance;
@@ -20,6 +22,15 @@ export interface FetchallResponse {
 }
 
 export const App: FC<AppProps> = observer(({ store }) => {
+  const mapContent = () => {
+    if (store.view.content === "main") {
+      return <Main store={store} />;
+    } else if (store.view.content === "history") {
+      return <History store={store} />;
+    } else {
+      return <></>;
+    }
+  };
   useEffect(() => {
     axios
       .get(store.info.server + "fetch_all/" + store.info.userId)
@@ -37,9 +48,7 @@ export const App: FC<AppProps> = observer(({ store }) => {
     <div className="app">
       <Layout>
         <Header store={store} />
-        <Layout.Content className="content">
-          <LogsList store={store} />
-        </Layout.Content>
+        <Layout.Content className="content">{mapContent()}</Layout.Content>
         <Footer store={store} />
       </Layout>
     </div>

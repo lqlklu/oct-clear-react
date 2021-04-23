@@ -1,0 +1,11 @@
+.upload-content {
+  display: block;
+}
+.result {
+  display: flex;
+}
+
+.result__image {
+  justify-content: center;
+  align-items: center;
+}
