@@ -7,6 +7,7 @@ import { RootInstance } from "@src/store";
 import { avaliableLang } from "../../i18n";
 
 import "./style.css";
+import { Link } from "react-router-dom";
 
 export interface HeaderProps {
   store: RootInstance;
@@ -32,7 +33,7 @@ export const Header: FC<HeaderProps> = observer(({ store }) => {
             store.view.setContent("main");
           }}
         >
-          {t("home")}
+          <Link to="/">{t("home")}</Link>
         </Menu.Item>
         <Menu.Item
           key="2"
@@ -40,7 +41,7 @@ export const Header: FC<HeaderProps> = observer(({ store }) => {
             store.view.setContent("history");
           }}
         >
-          {t("history")}
+          <Link to="/history">{t("history")}</Link>
         </Menu.Item>
       </Menu>
       <Select

@@ -31,26 +31,17 @@ export const Main: FC<MainProps> = observer(({ store }) => {
         if (response.status === "ok") {
           store.logs.add(response.payload);
           store.view.main.setResult(response.payload.path);
-          message.success(`${info.file.name} file uploaded successfully.`);
+          message.success(`${info.file.name}${t("main.upload-success")}`);
         } else {
-          message.error(`${info.file.name} file upload failed.`);
+          message.error(`${info.file.name}${t("main.upload-fail")}`);
         }
       } else if (status === "error") {
-        message.error(`${info.file.name} file upload failed.`);
+        message.error(`${info.file.name}${t("main.upload-fail")}`);
       }
     },
   };
-
   return (
     <div className="main">
-      <div className="main__upload">
-        <Upload.Dragger {...props}>
-          <p className="main__upload-icon">
-            <InboxOutlined />
-          </p>
-          <p className="main__upload-text">{t("main.upload")}</p>
-        </Upload.Dragger>
-      </div>
       <div className="main__result">
         <div className="main__result-item">
           {store.view.main.result ? (
@@ -67,6 +58,14 @@ export const Main: FC<MainProps> = observer(({ store }) => {
             <></>
           )}
         </div>
+      </div>
+      <div className="main__upload">
+        <Upload.Dragger {...props}>
+          <p className="main__upload-icon">
+            <InboxOutlined />
+          </p>
+          <p className="main__upload-text">{t("main.upload")}</p>
+        </Upload.Dragger>
       </div>
     </div>
   );

@@ -3,6 +3,7 @@ import axios, { AxiosResponse } from "axios";
 import { Layout } from "antd";
 import { observer } from "mobx-react";
 import { ConfigProvider } from "antd";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import { LogItemInstance } from "@store/logs";
 import { RootInstance } from "@src/store";
@@ -23,15 +24,6 @@ export interface FetchallResponse {
 }
 
 export const App: FC<AppProps> = observer(({ store }) => {
-  const mapContent = () => {
-    if (store.view.content === "main") {
-      return <Main store={store} />;
-    } else if (store.view.content === "history") {
-      return <History store={store} />;
-    } else {
-      return <></>;
-    }
-  };
   useEffect(() => {
     axios
       .get(store.info.server + "fetch_all/" + store.info.userId)
@@ -48,11 +40,22 @@ export const App: FC<AppProps> = observer(({ store }) => {
   return (
     <div className="app">
       <ConfigProvider locale={store.antLocale}>
-        <Layout>
-          <Header store={store} />
-          <Layout.Content className="content">{mapContent()}</Layout.Content>
-          <Footer store={store} />
-        </Layout>
+        <Router>
+          <Layout>
+            <Header store={store} />
+            <Layout.Content className="content">
+              <Switch>
+                <Route path="/history">
+                  <History store={store} />
+                </Route>
+                <Route path="/">
+                  <Main store={store} />
+                </Route>
+              </Switch>
+            </Layout.Content>
+            <Footer store={store} />
+          </Layout>
+        </Router>
       </ConfigProvider>
     </div>
   );
