@@ -3,7 +3,7 @@ import { observer } from "mobx-react";
 // import { List } from "antd";
 import { ResultPair } from "../result-pair";
 import { RootInstance } from "@src/store";
-import "./style.css";
+import "./style.scss";
 
 export interface LogsListProps {
   store: RootInstance;

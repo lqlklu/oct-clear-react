@@ -4,7 +4,7 @@ import { observer } from "mobx-react";
 import { RootInstance } from "@src/store";
 import { LogItemInstance } from "@store/logs";
 
-import "./style.css";
+import "./style.scss";
 
 export interface FooterProps {
   store: RootInstance;

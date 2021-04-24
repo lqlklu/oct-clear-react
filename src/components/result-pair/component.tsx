@@ -7,7 +7,7 @@ import { RootInstance } from "@src/store";
 import { LogItemInstance } from "@src/store/logs";
 import { observer } from "mobx-react";
 
-import "./style.css";
+import "./style.scss";
 import { useTranslation } from "react-i18next";
 
 export interface ResultPairProps {

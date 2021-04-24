@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "*": ["node_modules/*"],
+      "@src/*": ["src/*"],
+      "@store/*": ["src/store/*"]
+    }
+  }
+}

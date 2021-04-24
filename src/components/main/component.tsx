@@ -5,7 +5,7 @@ import { InboxOutlined } from "@ant-design/icons";
 
 import { RootInstance } from "@src/store";
 
-import "./style.css";
+import "./style.scss";
 import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 

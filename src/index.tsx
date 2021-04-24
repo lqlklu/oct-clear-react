@@ -8,7 +8,7 @@ import reportWebVitals from "./reportWebVitals";
 import { rootStore } from "./store";
 import "./i18n";
 
-import "./index.css";
+import "./index.scss";
 
 ReactDOM.render(
   <Provider store={rootStore}>

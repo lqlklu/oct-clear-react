@@ -12,7 +12,7 @@ import { Header } from "../header";
 import { History } from "../history/component";
 import { Footer } from "../footer";
 
-import "./style.css";
+import "./style.scss";
 
 export interface AppProps {
   store: RootInstance;

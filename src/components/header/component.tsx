@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 import { RootInstance } from "@src/store";
 import { avaliableLang } from "../../i18n";
 
-import "./style.css";
+import "./style.scss";
 import { Link } from "react-router-dom";
 
 export interface HeaderProps {
