@@ -16,5 +16,7 @@ export interface UploadResponse {
 }
 
 export const Footer: FC<FooterProps> = observer(({ store }) => {
-  return <Layout.Footer className="footer"></Layout.Footer>;
+  return (
+    <Layout.Footer className="footer">Oct Denoise ©2021 SCU</Layout.Footer>
+  );
 });

@@ -7,12 +7,14 @@ import { RootInstance } from "@src/store";
 
 import "./style.css";
 import { observer } from "mobx-react";
+import { useTranslation } from "react-i18next";
 
 export interface MainProps {
   store: RootInstance;
 }
 
 export const Main: FC<MainProps> = observer(({ store }) => {
+  const { t } = useTranslation();
   const props = {
     name: "file",
     data: {
@@ -40,28 +42,31 @@ export const Main: FC<MainProps> = observer(({ store }) => {
   };
 
   return (
-    <div className="upload-content">
-      <Upload.Dragger {...props}>
-        <p className="footer__upload-icon">
-          <InboxOutlined />
-        </p>
-        <p className="footer__upload-text">点击或拖拽上传</p>
-      </Upload.Dragger>
-      <div className="result">
-        {store.view.main.result ? (
-          <Image
-            className="result__image"
-            src={
-              store.info.server +
-              "image/" +
-              store.view.main.resultPath +
-              "?type=result"
-            }
-            alt="a"
-          />
-        ) : (
-          <></>
-        )}
+    <div className="main">
+      <div className="main__upload">
+        <Upload.Dragger {...props}>
+          <p className="main__upload-icon">
+            <InboxOutlined />
+          </p>
+          <p className="main__upload-text">{t("main.upload")}</p>
+        </Upload.Dragger>
+      </div>
+      <div className="main__result">
+        <div className="main__result-item">
+          {store.view.main.result ? (
+            <Image
+              src={
+                store.info.server +
+                "image/" +
+                store.view.main.resultPath +
+                "?type=result"
+              }
+              alt="a"
+            />
+          ) : (
+            <></>
+          )}
+        </div>
       </div>
     </div>
   );

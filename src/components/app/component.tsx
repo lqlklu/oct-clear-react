@@ -2,6 +2,7 @@ import React, { FC, useEffect } from "react";
 import axios, { AxiosResponse } from "axios";
 import { Layout } from "antd";
 import { observer } from "mobx-react";
+import { ConfigProvider } from "antd";
 
 import { LogItemInstance } from "@store/logs";
 import { RootInstance } from "@src/store";
@@ -46,11 +47,13 @@ export const App: FC<AppProps> = observer(({ store }) => {
   }, [store.info.server, store.info.userId]);
   return (
     <div className="app">
-      <Layout>
-        <Header store={store} />
-        <Layout.Content className="content">{mapContent()}</Layout.Content>
-        <Footer store={store} />
-      </Layout>
+      <ConfigProvider locale={store.antLocale}>
+        <Layout>
+          <Header store={store} />
+          <Layout.Content className="content">{mapContent()}</Layout.Content>
+          <Footer store={store} />
+        </Layout>
+      </ConfigProvider>
     </div>
   );
 });
