@@ -1,21 +1,21 @@
 .header {
   display: block;
   color: aliceblue;
-}
 
-.header__logo {
-  float: left;
-  margin-right: 1rem;
-}
+  .logo {
+    float: left;
+    margin-right: 1rem;
+  }
 
-.header__menu {
-  float: left;
-}
+  .menu {
+    float: left;
+  }
 
-.header__lang-select {
-  display: flex;
-  float: right;
-  height: 100%;
-  justify-content: center;
-  align-items: center;
+  .lang-select {
+    display: flex;
+    float: right;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+  }
 }

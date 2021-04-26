@@ -2,12 +2,12 @@ import React, { FC } from "react";
 import { message, Upload, Image } from "antd";
 import { UploadFile, UploadChangeParam } from "antd/lib/upload/interface";
 import { InboxOutlined } from "@ant-design/icons";
+import { observer } from "mobx-react";
+import { useTranslation } from "react-i18next";
 
 import { RootInstance } from "@src/store";
 
 import "./style.scss";
-import { observer } from "mobx-react";
-import { useTranslation } from "react-i18next";
 
 export interface MainProps {
   store: RootInstance;
@@ -42,8 +42,8 @@ export const Main: FC<MainProps> = observer(({ store }) => {
   };
   return (
     <div className="main">
-      <div className="main__result">
-        <div className="main__result-item">
+      <div className="result">
+        <div className="result-item">
           {store.view.main.result ? (
             <Image
               src={
@@ -59,12 +59,12 @@ export const Main: FC<MainProps> = observer(({ store }) => {
           )}
         </div>
       </div>
-      <div className="main__upload">
+      <div className="upload">
         <Upload.Dragger {...props}>
-          <p className="main__upload-icon">
+          <p className="upload-icon">
             <InboxOutlined />
           </p>
-          <p className="main__upload-text">{t("main.upload")}</p>
+          <p className="upload-text">{t("main.upload")}</p>
         </Upload.Dragger>
       </div>
     </div>

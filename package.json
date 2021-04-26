@@ -18,6 +18,7 @@
     "mobx-react": "^7.1.0",
     "mobx-state-tree": "^5.0.1",
     "react": "^17.0.1",
+    "react-cookie": "^4.0.3",
     "react-dom": "^17.0.1",
     "react-i18next": "^11.8.13",
     "react-router-dom": "^5.2.0",

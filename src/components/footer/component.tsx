@@ -1,6 +1,8 @@
 import React, { FC } from "react";
 import { Layout } from "antd";
 import { observer } from "mobx-react";
+import { useTranslation } from "react-i18next";
+
 import { RootInstance } from "@src/store";
 import { LogItemInstance } from "@store/logs";
 
@@ -16,7 +18,6 @@ export interface UploadResponse {
 }
 
 export const Footer: FC<FooterProps> = observer(({ store }) => {
-  return (
-    <Layout.Footer className="footer">Oct Denoise ©2021 SCU</Layout.Footer>
-  );
+  const { t } = useTranslation();
+  return <Layout.Footer className="footer">{t("copyright")}</Layout.Footer>;
 });

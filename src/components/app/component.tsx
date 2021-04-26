@@ -1,29 +1,39 @@
 import React, { FC, useEffect } from "react";
-import axios, { AxiosResponse } from "axios";
-import { Layout } from "antd";
 import { observer } from "mobx-react";
 import { ConfigProvider } from "antd";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { Layout } from "antd";
+import {
+  HashRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
+import axios, { AxiosResponse } from "axios";
 
-import { LogItemInstance } from "@store/logs";
-import { RootInstance } from "@src/store";
 import { Main } from "../main";
+import { History } from "../history";
+import { Signin } from "../signin";
 import { Header } from "../header";
-import { History } from "../history/component";
 import { Footer } from "../footer";
 
-import "./style.scss";
+import Cookie from "../../utils/cookie";
+import { useStore, LogItemInstance } from "../../store";
 
-export interface AppProps {
-  store: RootInstance;
-}
+import "./style.scss";
 
 export interface FetchallResponse {
   status: string;
   payload: LogItemInstance[];
 }
 
-export const App: FC<AppProps> = observer(({ store }) => {
+export const App: FC = observer(() => {
+  const store = useStore();
+  useEffect(() => {
+    let username = Cookie.get("username");
+    if (username) {
+      store.auth.setAuth(username);
+    }
+  });
   useEffect(() => {
     axios
       .get(store.info.server + "fetch_all/" + store.info.userId)
@@ -42,15 +52,26 @@ export const App: FC<AppProps> = observer(({ store }) => {
       <ConfigProvider locale={store.antLocale}>
         <Router>
           <Layout>
-            <Header store={store} />
+            <Header />
             <Layout.Content className="content">
               <Switch>
-                <Route path="/history">
-                  <History store={store} />
-                </Route>
-                <Route path="/">
-                  <Main store={store} />
-                </Route>
+                {!store.auth.authed ? (
+                  <Route path={"/signin"} component={Signin} exact />
+                ) : (
+                  <Redirect from="/signin" to="/" />
+                )}
+                {store.auth.authed ? (
+                  <Route path={"/"}>
+                    <Route path="/history" exact>
+                      <History store={store} />
+                    </Route>
+                    <Route path="/" exact>
+                      <Main store={store} />
+                    </Route>
+                  </Route>
+                ) : (
+                  <Redirect from="/" to="/signin" />
+                )}
               </Switch>
             </Layout.Content>
             <Footer store={store} />

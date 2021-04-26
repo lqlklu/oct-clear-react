@@ -1,3 +1,4 @@
+import { createContext, useContext } from "react";
 import { types, Instance, SnapshotIn, SnapshotOut } from "mobx-state-tree";
 import zhCN from "antd/lib/locale/zh_CN";
 import enUS from "antd/lib/locale/en_US";
@@ -5,6 +6,7 @@ import enUS from "antd/lib/locale/en_US";
 import { Info } from "./info";
 import { Logs } from "./logs";
 import { View } from "./view";
+import { Auth } from "./auth";
 import i18n from "../i18n";
 
 export const Root = types
@@ -14,6 +16,7 @@ export const Root = types
     info: Info,
     view: View,
     lang: types.string,
+    auth: Auth,
   })
   .actions((self) => {
     return {
@@ -57,4 +60,19 @@ export const rootStore = Root.create({
     },
   },
   lang: "zh-CN",
+  auth: {
+    authed: false,
+    token: "",
+  },
 });
+
+export const StoreContext = createContext(rootStore);
+
+export const useStore = () => {
+  return useContext(StoreContext);
+};
+
+export * from "./auth";
+export * from "./info";
+export * from "./logs";
+export * from "./view";

@@ -5,15 +5,17 @@ import "antd/dist/antd.css";
 
 import { App } from "./components/app";
 import reportWebVitals from "./reportWebVitals";
-import { rootStore } from "./store";
+import { rootStore, StoreContext } from "./store";
 import "./i18n";
 
 import "./index.scss";
 
 ReactDOM.render(
-  <Provider store={rootStore}>
-    <App store={rootStore} />
-  </Provider>,
+  <StoreContext.Provider value={rootStore}>
+    <Provider store={rootStore}>
+      <App />
+    </Provider>
+  </StoreContext.Provider>,
   document.getElementById("root")
 );
 
