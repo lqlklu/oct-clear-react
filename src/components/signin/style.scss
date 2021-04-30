@@ -3,4 +3,17 @@
   height: 100%;
   align-items: center;
   justify-content: center;
+
+  .btn {
+    display: inline;
+  }
+  .try {
+    float: right;
+    right: 0;
+  }
+  .primary {
+    .btn {
+      width: 100%;
+    }
+  }
 }

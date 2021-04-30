@@ -4,13 +4,18 @@ export const Auth = types
   .model("AuthModel")
   .props({
     authed: types.boolean,
-    token: types.string,
+    uid: types.number,
+    isTry: types.boolean,
   })
   .actions((self) => {
     return {
-      setAuth(token: string) {
+      setAuth(uid: number) {
         self.authed = true;
-        self.token = token;
+        self.uid = uid;
+      },
+      setTry() {
+        self.authed = true;
+        self.isTry = true;
       },
     };
   })

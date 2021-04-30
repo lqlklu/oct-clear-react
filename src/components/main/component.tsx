@@ -5,7 +5,7 @@ import { InboxOutlined } from "@ant-design/icons";
 import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { RootInstance } from "@src/store";
+import { RootInstance, useStore } from "../../store";
 
 import "./style.scss";
 
@@ -13,12 +13,14 @@ export interface MainProps {
   store: RootInstance;
 }
 
-export const Main: FC<MainProps> = observer(({ store }) => {
+export const Main: FC = observer(() => {
+  const store = useStore();
   const { t } = useTranslation();
+
   const props = {
     name: "file",
     data: {
-      user_id: store.info.userId,
+      user_id: store.auth.uid,
     },
     multiple: true,
     showUploadList: false,

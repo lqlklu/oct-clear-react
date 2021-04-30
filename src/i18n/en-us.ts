@@ -22,14 +22,19 @@ const enUS = {
   signin: {
     username: "Username",
     "username-msg": "Please input your Username!",
+    email: "Email",
+    "email-msg": "Please input your email",
     password: "Password",
     "password-msg": "Please input your Password!",
     btn: {
       login: "Log in",
+      register: "Rigister",
+      try: "试用",
     },
-    or: "Or",
-    register: "rigister now",
     forgetpwd: "Forgot password",
+    err: {
+      notfound: "",
+    },
   },
 };
 

@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 
 import { useStore } from "../../store";
 import { avaliableLang } from "../../i18n";
+import Cookie from "../../utils/cookie";
 
 import "./style.scss";
 
@@ -14,29 +15,23 @@ const Sub: FC = observer(() => {
   const { t } = useTranslation();
   return (
     <>
-      <div className="logo">{store.info.userId}</div>
+      {store.auth.isTry ? <></> : <div className="logo">{store.auth.uid}</div>}
       <Menu
         theme="dark"
         mode="horizontal"
         defaultSelectedKeys={["1"]}
         className="menu"
       >
-        <Menu.Item
-          key="1"
-          onClick={() => {
-            store.view.setContent("main");
-          }}
-        >
+        <Menu.Item key="1" onClick={() => {}}>
           <Link to="/">{t("home")}</Link>
         </Menu.Item>
-        <Menu.Item
-          key="2"
-          onClick={() => {
-            store.view.setContent("history");
-          }}
-        >
-          <Link to="/history">{t("history")}</Link>
-        </Menu.Item>
+        {store.auth.isTry ? (
+          <></>
+        ) : (
+          <Menu.Item key="2" onClick={() => {}}>
+            <Link to="/history">{t("history")}</Link>
+          </Menu.Item>
+        )}
       </Menu>
     </>
   );
@@ -47,14 +42,16 @@ export const Header: FC = observer(() => {
   const changeLang = (v: string) => {
     store.setLang(v);
   };
+  const defaultLang = Cookie.get("lang") || avaliableLang[0].lang;
   return (
     <Layout.Header className="header">
       {store.auth.authed ? <Sub /> : <></>}
       <Select
         className="lang-select"
-        defaultValue={store.lang}
+        defaultValue={defaultLang}
         onChange={changeLang}
-        style={{ width: 120 }}
+        style={{ width: 100 }}
+        size="small"
       >
         {avaliableLang.map((it) => (
           <Select.Option value={it.lang} key={it.lang}>

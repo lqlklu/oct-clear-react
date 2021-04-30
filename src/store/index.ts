@@ -8,6 +8,7 @@ import { Logs } from "./logs";
 import { View } from "./view";
 import { Auth } from "./auth";
 import i18n from "../i18n";
+import Cookie from "../utils/cookie";
 
 export const Root = types
   .model("RootModel")
@@ -16,6 +17,7 @@ export const Root = types
     info: Info,
     view: View,
     lang: types.string,
+    defaultLang: types.string,
     auth: Auth,
   })
   .actions((self) => {
@@ -23,6 +25,11 @@ export const Root = types
       setLang(l: string) {
         self.lang = l;
         i18n.changeLanguage(l);
+        Cookie.set("lang", l);
+      },
+      setDefaultLang(l: string) {
+        self.defaultLang = l;
+        this.setLang(l);
       },
     };
   })
@@ -50,19 +57,22 @@ export const rootStore = Root.create({
   },
   info: {
     server: "http://localhost:8000/",
-    userId: 6479,
   },
   view: {
-    content: "main",
     main: {
       result: false,
       resultPath: "",
     },
+    signin: {
+      isSignup: false,
+    },
   },
   lang: "zh-CN",
+  defaultLang: "zh-CN",
   auth: {
     authed: false,
-    token: "",
+    uid: 0,
+    isTry: false,
   },
 });
 

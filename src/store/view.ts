@@ -15,17 +15,32 @@ export const MainView = types
     };
   });
 
-export const ContentType = types.enumeration(["main", "history"]);
-export type ContentTypeInstance = Instance<typeof ContentType>;
+export const SigninView = types
+  .model("SigninViewModel")
+  .props({
+    isSignup: types.boolean,
+  })
+  .actions((self) => {
+    return {
+      signup() {
+        self.isSignup = true;
+      },
+      signin() {
+        self.isSignup = false;
+      },
+    };
+  });
 
 export const View = types
   .model("ViewModel")
-  .props({ content: ContentType, main: MainView })
+  .props({
+
+    main: MainView,
+    signin: SigninView,
+  })
   .actions((self) => {
     return {
-      setContent(c: ContentTypeInstance) {
-        self.content = c;
-      },
+      
     };
   });
 

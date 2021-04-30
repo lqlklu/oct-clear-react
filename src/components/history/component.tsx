@@ -1,17 +1,33 @@
-import React, { FC } from "react";
+import React, { FC, useEffect } from "react";
 import { observer } from "mobx-react";
 
 // import { List } from "antd";
+import axios, { AxiosResponse } from "axios";
 
+import { useStore, LogItemInstance } from "../../store";
 import { ResultPair } from "../result-pair";
-import { RootInstance } from "@src/store";
+
 import "./style.scss";
 
-export interface LogsListProps {
-  store: RootInstance;
+export interface FetchallResponse {
+  status: string;
+  payload: LogItemInstance[];
 }
-
-export const History: FC<LogsListProps> = observer(({ store }) => {
+export const History: FC = observer(() => {
+  const store = useStore();
+  useEffect(() => {
+    axios
+      .get(store.info.server + "fetch_all/" + store.auth.uid)
+      .then((data: AxiosResponse<FetchallResponse>) => {
+        return data.data;
+      })
+      .then((response) => {
+        if (response.status === "ok") {
+          store.logs.init(response.payload);
+        }
+      });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [store.info.server, store.auth.uid]);
   return (
     <div className="history">
       {store.logs.sorted.map((it) => (

@@ -8,45 +8,30 @@ import {
   Route,
   Redirect,
 } from "react-router-dom";
-import axios, { AxiosResponse } from "axios";
 
 import { Main } from "../main";
 import { History } from "../history";
 import { Signin } from "../signin";
 import { Header } from "../header";
 import { Footer } from "../footer";
-
 import Cookie from "../../utils/cookie";
-import { useStore, LogItemInstance } from "../../store";
+import { useStore } from "../../store";
 
 import "./style.scss";
-
-export interface FetchallResponse {
-  status: string;
-  payload: LogItemInstance[];
-}
 
 export const App: FC = observer(() => {
   const store = useStore();
   useEffect(() => {
-    let username = Cookie.get("username");
-    if (username) {
-      store.auth.setAuth(username);
+    let uid = Cookie.get("uid");
+    if (uid) {
+      store.auth.setAuth(parseInt(uid));
+    }
+    let lang = Cookie.get("lang");
+    if (lang) {
+      console.log("default-lang", lang);
+      store.setDefaultLang(lang);
     }
   });
-  useEffect(() => {
-    axios
-      .get(store.info.server + "fetch_all/" + store.info.userId)
-      .then((data: AxiosResponse<FetchallResponse>) => {
-        return data.data;
-      })
-      .then((response) => {
-        if (response.status === "ok") {
-          store.logs.init(response.payload);
-        }
-      });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [store.info.server, store.info.userId]);
   return (
     <div className="app">
       <ConfigProvider locale={store.antLocale}>
@@ -62,11 +47,15 @@ export const App: FC = observer(() => {
                 )}
                 {store.auth.authed ? (
                   <Route path={"/"}>
-                    <Route path="/history" exact>
-                      <History store={store} />
-                    </Route>
+                    {store.auth.isTry ? (
+                      <></>
+                    ) : (
+                      <Route path="/history" exact>
+                        <History />
+                      </Route>
+                    )}
                     <Route path="/" exact>
-                      <Main store={store} />
+                      <Main />
                     </Route>
                   </Route>
                 ) : (
@@ -74,7 +63,7 @@ export const App: FC = observer(() => {
                 )}
               </Switch>
             </Layout.Content>
-            <Footer store={store} />
+            <Footer />
           </Layout>
         </Router>
       </ConfigProvider>

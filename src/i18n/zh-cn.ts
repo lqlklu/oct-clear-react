@@ -22,14 +22,19 @@ const zhCN = {
   signin: {
     username: "用户名",
     "username-msg": "请输入用户名",
+    email: "电子邮件",
+    "email-msg": "请输入地址",
     password: "密码",
     "password-msg": "请输入密码",
     btn: {
       login: "登录",
+      register: "注册",
+      try: "试用",
     },
-    or: "或",
-    register: "注册",
     forgetpwd: "忘记密码",
+    err: {
+      notfound: "",
+    },
   },
 };
 
