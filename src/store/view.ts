@@ -4,13 +4,11 @@ export const MainView = types
   .model("MainViewModel")
   .props({
     result: types.boolean,
-    resultPath: types.string,
   })
   .actions((self) => {
     return {
-      setResult(p: string) {
+      setResult() {
         self.result = true;
-        self.resultPath = p;
       },
     };
   });
@@ -34,14 +32,11 @@ export const SigninView = types
 export const View = types
   .model("ViewModel")
   .props({
-
     main: MainView,
     signin: SigninView,
   })
   .actions((self) => {
-    return {
-      
-    };
+    return {};
   });
 
 export type ViewInstance = Instance<typeof View>;

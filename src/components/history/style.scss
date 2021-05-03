@@ -1,6 +1,12 @@
 .history {
-  display: block;
+  display: flex;
+  flex-direction: column;
   height: 100%;
-  text-align: center;
+  justify-content: flex-start;
+  align-items: center;
   overflow: auto;
+
+  .item {
+    display: flex;
+  }
 }

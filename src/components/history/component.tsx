@@ -1,7 +1,6 @@
 import React, { FC, useEffect } from "react";
 import { observer } from "mobx-react";
 
-// import { List } from "antd";
 import axios, { AxiosResponse } from "axios";
 
 import { useStore, LogItemInstance } from "../../store";
@@ -13,6 +12,7 @@ export interface FetchallResponse {
   status: string;
   payload: LogItemInstance[];
 }
+
 export const History: FC = observer(() => {
   const store = useStore();
   useEffect(() => {
@@ -32,7 +32,7 @@ export const History: FC = observer(() => {
     <div className="history">
       {store.logs.sorted.map((it) => (
         <div className="item" key={it.path}>
-          <ResultPair item={it} store={store} />
+          <ResultPair item={it} showBtn />
         </div>
       ))}
     </div>

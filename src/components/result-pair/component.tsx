@@ -5,17 +5,18 @@ import { Button, Image, Modal } from "antd";
 import { ExclamationCircleOutlined } from "@ant-design/icons";
 import axios from "axios";
 
-import { RootInstance } from "@src/store";
+import { useStore } from "../../store";
 import { LogItemInstance } from "@src/store/logs";
 
 import "./style.scss";
 
 export interface ResultPairProps {
-  store: RootInstance;
   item: LogItemInstance;
+  showBtn?: boolean;
 }
 
-export const ResultPair: FC<ResultPairProps> = observer(({ store, item }) => {
+export const ResultPair: FC<ResultPairProps> = observer(({ item, showBtn }) => {
+  const store = useStore();
   const { t } = useTranslation();
   const server = store.info.server;
   const url = server + "image/" + item.path;
@@ -47,17 +48,23 @@ export const ResultPair: FC<ResultPairProps> = observer(({ store, item }) => {
       <div className="info">
         <p>{item.name}</p>
         <p>{new Date(item.time * 1000).toLocaleString()}</p>
-        <Button
-          className="btn-ok"
-          onClick={() => {
-            window.open(url + "?type=result");
-          }}
-        >
-          {t("button.download")}
-        </Button>
-        <Button onClick={onRemove} danger>
-          {t("button.remove")}
-        </Button>
+        {showBtn === true ? (
+          <>
+            <Button
+              className="btn-ok"
+              onClick={() => {
+                window.open(url + "?type=result");
+              }}
+            >
+              {t("button.download")}
+            </Button>
+            <Button onClick={onRemove} danger>
+              {t("button.remove")}
+            </Button>
+          </>
+        ) : (
+          <></>
+        )}
       </div>
     </div>
   );

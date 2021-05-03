@@ -1,10 +1,10 @@
 import { Instance, SnapshotIn, SnapshotOut, types } from "mobx-state-tree";
 
 export const LogItem = types.model("LogsItemModel").props({
-  name: types.string,
-  user_id: types.number,
-  path: types.string,
-  time: types.number,
+  name: types.optional(types.string, ""),
+  user_id: types.optional(types.number, 0),
+  path: types.optional(types.string, ""),
+  time: types.optional(types.number, 0),
 });
 
 export type LogItemInstance = Instance<typeof LogItem>;
@@ -15,6 +15,7 @@ export const Logs = types
   .model("LogsModel")
   .props({
     items: types.array(LogItem),
+    curItem: types.optional(LogItem, {}),
   })
   .actions((self) => {
     return {
@@ -28,6 +29,9 @@ export const Logs = types
       remove(it: LogItemInstance) {
         self.items.remove(it);
         // self.items.filter((i) => i.path === it.path);
+      },
+      setCurItem(it: LogItemInstance) {
+        self.curItem = it;
       },
     };
   })
