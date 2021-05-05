@@ -19,7 +19,7 @@ export const ResultPair: FC<ResultPairProps> = observer(({ item, showBtn }) => {
   const store = useStore();
   const { t } = useTranslation();
   const server = store.info.server;
-  const url = server + "image/" + item.path;
+  const url = server + "image/" + item.name;
   const onRemove = () => {
     Modal.confirm({
       title: t("message.confirm.remove.title"),
