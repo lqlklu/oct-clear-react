@@ -56,7 +56,7 @@ export const rootStore = Root.create({
     items: [],
   },
   info: {
-    server: "http://localhost:8000/",
+    server: "http://localhost/octclear/",
   },
   view: {
     main: {
