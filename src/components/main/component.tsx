@@ -17,7 +17,7 @@ export const Main: FC = observer(() => {
   const props = {
     name: "file",
     data: {
-      user_id: store.auth.uid,
+      token: store.auth.uid,
     },
     multiple: true,
     showUploadList: false,

@@ -2,7 +2,7 @@ import { Instance, SnapshotIn, SnapshotOut, types } from "mobx-state-tree";
 
 export const LogItem = types.model("LogsItemModel").props({
   name: types.optional(types.string, ""),
-  user_id: types.optional(types.number, 0),
+  token: types.optional(types.string, ""),
   path: types.optional(types.string, ""),
   time: types.optional(types.number, 0),
 });

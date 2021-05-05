@@ -17,7 +17,7 @@ export const History: FC = observer(() => {
   const store = useStore();
   useEffect(() => {
     axios
-      .get(store.info.server + "fetch_all/" + store.auth.uid)
+      .get(store.info.server + "fetch_all?token=" + store.auth.uid)
       .then((data: AxiosResponse<FetchallResponse>) => {
         return data.data;
       })
