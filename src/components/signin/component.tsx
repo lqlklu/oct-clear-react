@@ -36,7 +36,7 @@ const SigninButton = observer(() => {
         <Button
           className="btn register"
           onClick={() => {
-            store.view.signin.signup();
+            store.view.signin.toggleSignup();
           }}
         >
           {t("signin.btn.register")}
@@ -70,7 +70,7 @@ const SignupButton = observer(() => {
         <Button
           className="btn login"
           onClick={() => {
-            store.view.signin.signin();
+            store.view.signin.toggleSignin();
           }}
         >
           {t("signin.btn.login")}
@@ -132,6 +132,9 @@ export const Signin: FC = observer(() => {
       } else if (data.status === "err") {
         if (data.code === 404) {
           message.error("Wrong username or password");
+        } else if (data.code === 403) {
+          store.auth.setVerify(data.payload.email);
+          his.replace("/verify");
         }
       }
     });
@@ -144,9 +147,8 @@ export const Signin: FC = observer(() => {
       console.log(res);
       let data = res.data as SignupResponse;
       if (data.status === "ok") {
-        Cookie.set("uid", data.payload.uid.toString(), 30);
-        store.auth.setAuth(data.payload.uid);
-        his.replace("/");
+        store.auth.setVerify(data.payload.email);
+        his.replace("/verify");
       } else if (data.status === "err") {
         if (data.code === 403) {
           message.error("User has exist.");

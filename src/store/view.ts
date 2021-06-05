@@ -20,10 +20,10 @@ export const SigninView = types
   })
   .actions((self) => {
     return {
-      signup() {
+      toggleSignup() {
         self.isSignup = true;
       },
-      signin() {
+      toggleSignin() {
         self.isSignup = false;
       },
     };

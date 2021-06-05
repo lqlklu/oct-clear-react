@@ -56,8 +56,8 @@ export const rootStore = Root.create({
     items: [],
   },
   info: {
-    server: "http://120.78.183.65/octclear/",
-    // server: "http://localhost/octclear/",
+    // server: "http://120.78.183.65/octclear/",
+    server: "http://localhost/octclear/",
   },
   view: {
     main: {
@@ -74,6 +74,8 @@ export const rootStore = Root.create({
     authed: false,
     uid: 0,
     isTry: false,
+    verifyUid: 0,
+    verifyEmail: "",
   },
 });
 

@@ -1,8 +1,9 @@
 import React, { FC } from "react";
-import { Layout, Menu, Select } from "antd";
+import { Layout, Menu, Select, Avatar, Popover } from "antd";
+import { UserOutlined, LogoutOutlined } from "@ant-design/icons";
 import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 import { useStore } from "../../store";
 import { avaliableLang } from "../../i18n";
@@ -10,12 +11,45 @@ import Cookie from "../../utils/cookie";
 
 import "./style.scss";
 
+const PopoverContent: FC = observer(() => {
+  const store = useStore();
+  const { t } = useTranslation();
+  const his = useHistory();
+  return (
+    <div className="avator-popover">
+      <div
+        className="button"
+        onClick={() => {
+          store.auth.logout();
+          his.replace("/signin");
+        }}
+      >
+        <LogoutOutlined />
+        <span className="text">{t("header.popover.logout")}</span>
+      </div>
+    </div>
+  );
+});
+
 const Sub: FC = observer(() => {
   const store = useStore();
   const { t } = useTranslation();
   return (
     <>
-      {store.auth.isTry ? <></> : <div className="logo">{store.auth.uid}</div>}
+      {store.auth.isTry ? (
+        <></>
+      ) : (
+        <div className="logo">
+          <Popover
+            style={{ margin: 0 }}
+            content={<PopoverContent />}
+            title={"UID: " + store.auth.uid}
+            placement="bottomLeft"
+          >
+            <Avatar size="large" icon={<UserOutlined />} />
+          </Popover>
+        </div>
+      )}
       <Menu
         theme="dark"
         mode="horizontal"

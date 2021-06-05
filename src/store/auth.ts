@@ -1,4 +1,5 @@
 import { Instance, SnapshotIn, SnapshotOut, types } from "mobx-state-tree";
+import Cookie from "../utils/cookie";
 
 export const Auth = types
   .model("AuthModel")
@@ -6,6 +7,8 @@ export const Auth = types
     authed: types.boolean,
     uid: types.number,
     isTry: types.boolean,
+    verifyUid: types.number,
+    verifyEmail: types.string,
   })
   .actions((self) => {
     return {
@@ -13,9 +16,19 @@ export const Auth = types
         self.authed = true;
         self.uid = uid;
       },
+      setVerify( email: string) {
+        self.verifyEmail = email;
+      },
       setTry() {
         self.authed = true;
         self.isTry = true;
+      },
+      signup() {},
+      signin() {},
+      signout() {},
+      logout() {
+        self.authed = false;
+        Cookie.del("uid");
       },
     };
   })

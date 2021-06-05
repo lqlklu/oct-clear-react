@@ -14,6 +14,7 @@ import { History } from "../history";
 import { Signin } from "../signin";
 import { Header } from "../header";
 import { Footer } from "../footer";
+import { Verify } from "../verify";
 import Cookie from "../../utils/cookie";
 import { useStore } from "../../store";
 
@@ -41,25 +42,29 @@ export const App: FC = observer(() => {
             <Layout.Content className="content">
               <Switch>
                 {!store.auth.authed ? (
-                  <Route path={"/signin"} component={Signin} exact />
-                ) : (
-                  <Redirect from="/signin" to="/" />
-                )}
-                {store.auth.authed ? (
-                  <Route path={"/"}>
-                    {store.auth.isTry ? (
-                      <></>
-                    ) : (
-                      <Route path="/history" exact>
-                        <History />
-                      </Route>
-                    )}
-                    <Route path="/" exact>
-                      <Main />
+                  <>
+                    <Route path={"/signin"} component={Signin} exact />
+                    <Route path="/verify">
+                      <Verify />
                     </Route>
-                  </Route>
+                    <Redirect from="/" to="/signin" />
+                  </>
                 ) : (
-                  <Redirect from="/" to="/signin" />
+                  <>
+                    <Route path={"/"}>
+                      {store.auth.isTry ? (
+                        <></>
+                      ) : (
+                        <Route path="/history" exact>
+                          <History />
+                        </Route>
+                      )}
+                      <Route path="/" exact>
+                        <Main />
+                      </Route>
+                    </Route>
+                    <Redirect from="/signin" to="/" />
+                  </>
                 )}
               </Switch>
             </Layout.Content>

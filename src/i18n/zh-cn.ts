@@ -36,6 +36,18 @@ const zhCN = {
       notfound: "",
     },
   },
+  verify: {
+    code: "验证码",
+    "code-msg": "请输入验证码",
+    btn: {
+      verify: "验证",
+    },
+  },
+  header: {
+    popover: {
+      logout: "退出",
+    },
+  },
 };
 
 export default zhCN;

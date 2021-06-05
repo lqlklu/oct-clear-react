@@ -36,6 +36,18 @@ const enUS = {
       notfound: "",
     },
   },
+  verify: {
+    code: "Verify code",
+    "code-msg": "Please input your code",
+    btn: {
+      verify: "Verify",
+    },
+  },
+  header: {
+    popover: {
+      logout: "Lou out",
+    },
+  },
 };
 
 export default enUS;
